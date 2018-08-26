@@ -1,0 +1,10 @@
+<% if @friends.any? %>
+  <% @friends.each do |friend| %>
+    <p>
+      <%= link_to friend.name, user_path(friend) %>
+    </p>
+  <% end %>
+  <% else %>
+  <h2>Seems that none of your friends use this app</h2>
+<% end %>
+<%= link_to "Back", root_path %>

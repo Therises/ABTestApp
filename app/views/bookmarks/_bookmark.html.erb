@@ -1,0 +1,31 @@
+<li id=<%= "bookmark-#{bookmark.id}" %>> 
+  <div class="thumbnail">
+    <% if bookmark.thumbnail? %>
+      <a href="<%= bookmark.url %>" target="blank">
+        <%= image_tag(bookmark.thumbnail_url(:display), class: 'img-thumbnail', alt: bookmark.name) %>
+      </a>
+      <p class="overlay-text">
+        <%= bookmark.name %>
+      </p>
+      
+    <% else %>
+      <a href="<%= bookmark.url %>" class="thumbnail no-thumb">
+        <p><%= bookmark.name %></p>
+      </a>
+    <% end %>
+    <% if current_user.id == bookmark.user_id %>
+      <div class="overlay">
+        <p class="overlay-links">
+          <%= link_to '×', bookmark_path(bookmark), method: :delete, remote: true, class: 'overlay-icon delete' %>
+          <%= link_to '✎', edit_bookmark_path(bookmark), class: 'overlay-icon edit' %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</li>
+
+
+
+
+
+

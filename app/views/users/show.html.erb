@@ -1,0 +1,40 @@
+<% if @bookmarks.any? %>
+  <header>
+    <h1>Showing <%= @user.name %>'s bookmarks</h1>
+    <div class="search-box">
+      <%= form_with method: :get, role: 'search', local: true do %>
+        <%= text_field_tag :query, params[:query], placeholder: 'Search bookmarks', required: true %>
+        <%= submit_tag "Search", name: nil %>
+      <% end %>
+    </div>
+  </header>
+  
+  <main>
+    <ul class="bookmarks">
+      <% @bookmarks.each do |bookmark| %>
+        <%= render bookmark %>
+      <% end %>
+    </ul>
+  </main>
+
+  <footer>
+    <%= paginate @bookmarks %>
+    <p class="pager_info">
+      <%= page_entries_info @bookmarks %>
+    </p>
+  </footer>
+
+<% else %>
+  <header>
+    <% unless params[:query].present? %>
+      <h2>Seems like your friend, <%= @user.name %>, haven't made any bookmarks yet</h2>
+    <% else %>
+      <h2>Seems like your friend, <%= @user.name %>, haven't made any bookmarks that match the search</h2>
+    <% end %>
+  </header>
+<% end %>
+<% unless params[:query].present? %>
+  <%= link_to "Back", friends_path %>
+<% else %>
+  <%= link_to "Back", user_path(@user) %>
+<% end %>

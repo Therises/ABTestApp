@@ -1,0 +1,56 @@
+<% unless current_user %>
+  <% controller.redirect_to welcome_path  %>
+<% else %>
+
+  <ul id="user_nav">
+    <li>Signed in as <strong><%= current_user.name %></strong>!</li>
+    <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+    <li><%= link_to "Friends", friends_path %></li>    
+  </ul>
+  
+  <header>
+
+    <a href="/bookmarks">
+      <h1>BOOKMARKS</h1>
+    </a>
+  
+    <%= form_with method: :get, role: 'search', local: true do %>
+      <%= text_field_tag :query, params[:query], placeholder: 'Search bookmarks', required: true %>
+      <%= submit_tag "Search", name: nil %>
+    <% end %>
+
+  </header>
+
+  <main>
+  
+    <%= form_with scope: :bookmark, url: bookmarks_path, local: true do |f| %>
+      <ul class="form-list">
+        <li>
+          <%= f.label :name, for: 'name' %>
+          <%= f.text_field :name, id: 'name', placeholder: 'Name your bookmark', required: true %>
+        </li>
+        <li>
+          <%= f.label :url, for: 'url' %>
+          <%= f.text_field :url, id: 'url', placeholder: 'Paste URL of your bookmark', required: true %>
+        </li>
+        <li>
+          <%= f.submit %>
+        </li>
+      </ul>
+    <% end %>
+  
+    <ul class="bookmarks">
+      <% @bookmarks.each do |bookmark| %>
+      <%= render bookmark %>
+      <% end %>
+    </ul>
+  
+  </main>
+  
+  <footer>
+    <%= paginate @bookmarks %>
+    <p class="pager_info">
+      <%= page_entries_info @bookmarks %>
+    </p>
+  </footer>
+<% end %>
