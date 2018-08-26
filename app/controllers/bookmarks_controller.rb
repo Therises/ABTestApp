@@ -1,4 +1,5 @@
 class BookmarksController < ApplicationController
+  before_action :find_bookmark, only: %i(edit update destroy)
   def index
     if params[:query].present?
       @bookmarks = Bookmark.search(params[:query]).page(params[:page]).per(12)
@@ -11,8 +12,10 @@ class BookmarksController < ApplicationController
     bookmark.get_webshot
     redirect_back fallback_location: root_path
   end
-  def edit
-  end
+
+  def edit; end
+
+  def update; end
 
   def destroy
     @bookmark = current_user.bookmarks.find(params[:id])
@@ -22,6 +25,9 @@ class BookmarksController < ApplicationController
   def welcome; end
 
   private
+  def find_bookmark
+    @bookmark = current_user.bookmarks.find(params[:id])
+  end
   def bookmark_params
     params.require(:bookmark).permit(:name, :url)
   end

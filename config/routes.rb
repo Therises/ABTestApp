@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :bookmarks, only: %i(edit destroy create index)
+  resources :bookmarks, except: [:show, :new]
   resources :users, only: :show
   get 'tos', to: 'static_pages#tos'
   get 'auth/:provider/callback', to: 'sessions#create'
