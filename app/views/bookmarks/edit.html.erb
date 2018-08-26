@@ -1,0 +1,13 @@
+<section id="edit-section">
+  <h1>Editing <%= @bookmark.name %> </h1>
+
+  <% if @bookmark.thumbnail? %>
+    <p>Current thumbnail:</p>
+    <%= image_tag(@bookmark.thumbnail_url(:display), class: 'img-thumbnail', alt: @bookmark.name) %>
+  <% else %>
+    <p>Thumbnail is not available</p>
+  <% end %>
+  
+  <%= render 'bookmarks/form', path: bookmark_path(@bookmark), method: :patch, submit_name: 'Update bookmark' %>
+  <%= link_to "Back", root_path %>
+</section>
