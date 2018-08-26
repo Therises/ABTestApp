@@ -12,7 +12,6 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'webshot'
 gem 'delayed_job_active_record'
-gem 'daemons'
 gem 'pg_search'
 gem 'koala'
 
