@@ -23,7 +23,7 @@
 
   <main>
 
-    <%= render 'form', path: bookmarks_path, method: :post, submit_name: 'Create new bookmark' %> 
+    <%= render 'bookmarks/form', path: bookmarks_path, method: :post, submit_name: 'Create new bookmark' %> 
 
     <ul class="bookmarks">
       <% @bookmarks.each do |bookmark| %>
