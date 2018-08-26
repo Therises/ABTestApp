@@ -15,8 +15,8 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = current_user.bookmark.id
-    @bookmark.destroy
+    @bookmark = current_user.bookmarks.find(params[:id])
+    @bookmark.destroy if current_user.id == @bookmark.user_id
   end
 
   def welcome; end
