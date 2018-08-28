@@ -17,6 +17,8 @@ class BookmarksController < ApplicationController
 
   def update
     @bookmark.update(bookmark_params)
+    @bookmark.get_webshot
+    redirect_to root_path
   end
 
   def destroy
