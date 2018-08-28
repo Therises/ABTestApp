@@ -1,42 +1,77 @@
 <% unless current_user %>
   <% controller.redirect_to welcome_path  %>
 <% else %>
-
-  <ul id="user_nav">
-    <li>Signed in as <strong><%= current_user.name %></strong>!</li>
-    <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
-    <li><%= link_to "Friends", friends_path %></li>    
-  </ul>
-  
-  <header>
-
-    <a href="/bookmarks">
-      <h1>BOOKMARKS</h1>
-    </a>
-  
-    <%= form_with method: :get, role: 'search', local: true do %>
-      <%= text_field_tag :query, params[:query], placeholder: 'Search bookmarks', required: true %>
-      <%= submit_tag "Search", name: nil %>
-    <% end %>
-
+<!-- user info, etc. -->
+  <div class="card">
+    <div class="card-body text-center">
+      <span class="mr-2">Signed in as <strong><%= current_user.name %></strong>!</span>
+      <%= link_to "Sign out", signout_path, class: 'btn btn btn-outline-info' %>
+      <%= link_to "Friends", friends_path, class: 'btn btn-outline-info' %>
+    </div>
+  </div>
+<!-- add new bookmark form -->
+    <div class="card">
+      <div class="card-body">
+        <button class="btn btn-basic" type="button" data-toggle="collapse" data-target="#add-form" aria-expanded="false" aria-controls="add-form">
+          <h4>Add new bookmark</h4>
+        </button>
+        <div class="collapse mt-3" id="add-form">
+          <%= render 'bookmarks/form', path: bookmarks_path, method: :post, submit_name: 'Create new bookmark', fclass: 'form-inline justify-content-center' %>
+        </div>
+      </div>  
+    </div>
+<!-- search form -->
+  <header class="my-2">
+    <div class="card mb-2">
+      <div class="card-body">
+        <button class="btn btn-basic" type="button" data-toggle="collapse" data-target="#search-form-wrap" aria-expanded="false" aria-controls="search-form-wrap">
+          <h4>Search</h4>
+        </button>
+        <div class="collapse mt-3" id="search-form-wrap">
+          <%= form_with method: :get, role: 'search', local: true, class: 'form-inline justify-content-center', id: 'search-form' do |f| %>
+            <div class="form-group">
+              <%= f.text_field :q, id: 'search', placeholder: 'Search bookmarks', class: 'form-control mb-2 mr-sm-2', required: true %>
+              <%= f.submit "Search", name: nil, class: 'btn btn-primary mb-2' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </header>
-
+<!-- bookmarks renders -->
   <main>
-
-    <%= render 'bookmarks/form', path: bookmarks_path, method: :post, submit_name: 'Create new bookmark' %> 
-
-    <ul class="bookmarks">
+    <div class="row my-3" id="bookmarks">
       <% @bookmarks.each do |bookmark| %>
-      <%= render bookmark %>
+        <div class="col-xl-3 col-lg-4 col-sm-6 bookmark" id=<%= "bookmark-#{bookmark.id}" %>> 
+          <%= render bookmark %>
+        </div>
       <% end %>
-    </ul>
-  
+    </div>
   </main>
-  
+<!-- footer/pagination -->
   <footer>
     <%= paginate @bookmarks %>
     <p class="pager_info">
       <%= page_entries_info @bookmarks %>
     </p>
   </footer>
+<!-- modal for edit -->
+  <div class="modal fade" id="modal_edit">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">PUSSY</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body - form render via js -->
+        <div class="modal-body" id="modal-form"></div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <% end %>

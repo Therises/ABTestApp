@@ -1,0 +1,3 @@
+$("#modal-form").html("<%= j render 'bookmarks/form', path: bookmark_path(@bookmark), method: :patch, submit_name: 'Update bookmark', fclass: 'justify-content-center'  %>");
+$(".modal-title").text('Edit bookmark ' + "<%= j @bookmark.name %>");
+$('#modal_edit').modal('show');

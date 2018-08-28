@@ -1,31 +1,27 @@
-<li id=<%= "bookmark-#{bookmark.id}" %>> 
-  <div class="thumbnail">
+<div class="card mb-2">
     <% if bookmark.thumbnail? %>
-      <a href="<%= bookmark.url %>" target="blank">
-        <%= image_tag(bookmark.thumbnail_url(:display), class: 'img-thumbnail', alt: bookmark.name) %>
+      <a id="bookmark-<%= bookmark.id %>-url" href="<%= bookmark.url %>" target="blank">
+        <%= image_tag(bookmark.thumbnail_url(:display), class: 'card-img-top', alt: bookmark.name) %>
       </a>
-      <p class="overlay-text">
+      <p class="overlay-name" id="bookmark-<%= bookmark.id %>-name">
         <%= bookmark.name %>
       </p>
-      
     <% else %>
-      <a href="<%= bookmark.url %>" class="thumbnail no-thumb">
-        <p><%= bookmark.name %></p>
+      <a href="<%= bookmark.url %>" class="thumbnail no-thumb" target="blank">
+        <p class="text-center" id="bookmark-<%= bookmark.id %>-name"><%= bookmark.name %></p>
+        <p class="text-center small">no thumbnail available</p>
       </a>
     <% end %>
     <% if current_user.id == bookmark.user_id %>
-      <div class="overlay">
-        <p class="overlay-links">
-          <%= link_to '×', bookmark_path(bookmark), method: :delete, remote: true, class: 'overlay-icon delete' %>
-          <%= link_to '✎', edit_bookmark_path(bookmark), class: 'overlay-icon edit'%>
-        </p>
+      <div class="overlay-links p-2 left" >
+        <%= link_to edit_bookmark_path(bookmark), data: {remote: true, toggle: "modal", target: "#myModal", bookmark_name: bookmark.name}, class: 'btn btn-secondary rounded-circle border-white' do %>
+          <%= fa_icon 'pencil' %>
+        <% end %>
+      </div>
+      <div class="overlay-links p-2 right">
+        <%= link_to bookmark_path(bookmark), method: :delete, class: 'btn btn-secondary rounded-circle border-white', data: { confirm: 'Are you sure?', remote: true } do %>
+          <%= fa_icon 'times' %>
+        <% end %>
       </div>
     <% end %>
-  </div>
-</li>
-
-
-
-
-
-
+</div>

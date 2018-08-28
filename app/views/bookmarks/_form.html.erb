@@ -1,15 +1,11 @@
-<%= form_with scope: :bookmark, url: path, method: method, local: true do |f| %>
-  <ul class="form-list">
-    <li>
-      <%= f.label :name, for: 'name' %>
-      <%= f.text_field :name, id: 'name', placeholder: 'Name your bookmark', required: true %>
-    </li>
-    <li>
-      <%= f.label :url, for: 'url' %>
-      <%= f.text_field :url, id: 'url', placeholder: 'Paste URL of your bookmark', required: true %>
-    </li>
-    <li>
-      <%= f.submit submit_name %>
-    </li>
-  </ul>
+<%= form_with scope: :bookmark, url: path, method: method, class: fclass do |f| %>
+  <div class="form-group">
+    <%= f.label :name, 'Name:', for: 'name', class: 'mr-2' %>
+    <%= f.text_field :name, id: 'name', placeholder: 'Name your bookmark', class: 'form-control mb-2 mr-sm-2', required: true %>
+  </div>
+  <div class="form-group">
+    <%= f.label :url, 'URL:', for: 'url', class: 'mr-2' %>
+    <%= f.url_field :url, id: 'url', placeholder: 'Paste URL of your bookmark', class: 'form-control mb-2 mr-sm-2', required: true %>
+  </div>
+      <%= f.submit submit_name, class: 'btn btn-primary mb-2' %>
 <% end %>

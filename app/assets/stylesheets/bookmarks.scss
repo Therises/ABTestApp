@@ -1,183 +1,55 @@
-// Place all the styles related to the bookmarks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@media (min-width: 768px) {
+  #search-collapse {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  #search-title {
+    display: none;
+  }
+}
 
-.form-list {
-  li {
+
+.bookmark {
+  position: relative;
+  height: 100%;
+
+  .card {
+    overflow: hidden;
+  }
+
+  .no-thumb {
+    height: 141px;
+    padding-top: 15%;
+    text-decoration: none;
+    font-family: sans-serif;
     text-align: center;
-    #url {
-      margin-left: 22px;
-    }
-    &:last-child {
-      padding-left: 40px;
-    }
+    color: #888;
   }
-}
 
-.name {
-  position: absolute;
-  padding-top: 100px;
-  padding-left: 20px;
-}
-
-.thumbnail {
-  display: block;
-  position: relative;
-  height: 141px;
-  width: 250px;
-  background-color: #eee;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  overflow: hidden;
-
-  &:hover .overlay-links {
-    opacity: 1;
+  .overlay-name,
+  .overlay-links {
+    position: absolute;
   }
-}
-.overlay-text {
-  position: absolute;
-  padding: 1px 10px 1px 200px;
-  top: 102px;
-  right: 0px;
-  background-color: lightgray;
-}
-.overlay  {
-  position: relative;
-  bottom: 18px;
-  background: lightgray;
-  border-radius: 4px;
+
+  .overlay-name {
+    bottom: -16px;
+    right: 0;
+    padding: 0 20px 0 100%;
+    background-color: #eee;
+  }
 
   .overlay-links {
-    opacity: 0;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-
-    .overlay-icon {
-      position: absolute;
-      bottom: 108px;
-      text-decoration: none;
-      color: #111;
-      border: 1px solid black;
-      border-radius: 100%;
-      padding: 2px 5px;
-      background-color: white;
+    &.right {
+      right: 10px;
     }
-    .delete {
-      left: 216px;
-    }
-    .edit {
-      left: 6px;
+    &.left {
+      left: 10px;
     }
   }
 }
-.no-thumb {
-  text-decoration: none;
-  font-family: sans-serif;
-  text-align: center;
-  line-height: 104px;
-  color: #888;
-}
-.img-thumbnail {
-  display: inline-block;
-  max-width: 100%;
-  height: auto;
-  padding: 4px;
-  line-height: 1.42857143;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-}
-
-.pagination {
-  display: inline-block;
-  padding-left: 0;
-  margin-top: 20px;
-  border-radius: 4px;
-
-  span {
-    a {
-      position: relative;
-      float: left;
-      padding: 6px 12px;
-      margin-left: -1px;
-      line-height: 1.42857143;
-      color: #337ab7;
-      text-decoration: none;
-      background-color: #fff;
-      border: 1px solid #ddd;
-    }
-
-    &:first-child,
-    &:first-child a {
-      margin-left: 0;
-      border-top-left-radius: 4px;
-      border-bottom-left-radius: 4px;
-    }
-
-    &:last-child,
-    &:last-child a {
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-    }
-
-    &:hover,
-    a:hover {
-      z-index: 2;
-      color: #23527c;
-      background-color: #eee;
-      border-color: #ddd;
-    }
-
-    &.current,
-    &.current:focus,
-    &.current:hover {
-      position: relative;
-      float: left;
-      padding: 6px 12px;
-      margin-left: -1px;
-      line-height: 1.42857143;
-      z-index: 3;
-      text-decoration: none;
-      color: #fff;
-      cursor: default;
-      background-color: #337ab7;
-      border: 1px solid #337ab7;
-    }
-  }
-}
-
-.bookmarks {
-  display: grid;
-  grid-gap: 10px;
-  justify-items: center;
-}
-
-
-@media only screen and (max-width: 600px) {
-  .bookmarks {
-    grid-template: repeat(12, 1fr) / repeat(1, 1fr);
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .bookmarks {
-    grid-template: repeat(6, 1fr) / repeat(2, 1fr);
-  }
-}
-@media only screen and (min-width: 992px) {
-  .bookmarks {
-    grid-template: repeat(4, 1fr) / repeat(3, 1fr);
-  }
-} 
-@media only screen and (min-width: 1200px) {
-  .bookmarks {
-    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
-  }
-}
-#edit-section {
+.welcome-wrapper {
+  margin: 50px auto 40px auto;
+  width: 600px;
   text-align: center;
 }

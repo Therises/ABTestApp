@@ -13,4 +13,13 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+$(document).ready(function {
+  $("#search_form input").keyup(function() {
+    $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
+    return false;
+  });
+});

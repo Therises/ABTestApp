@@ -18,5 +18,7 @@
 
 .byebug_history
 
+*.png
+
 # Ignore application configuration
 /config/application.yml

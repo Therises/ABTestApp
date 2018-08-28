@@ -1,4 +1,5 @@
 <% if @friends.any? %>
+  <h2>Your friends who also use this app</h2>
   <% @friends.each do |friend| %>
     <p>
       <%= link_to friend.name, user_path(friend) %>
