@@ -5,14 +5,17 @@ class BookmarksController < ApplicationController
   end
   def create
     @bookmark = Bookmark.create(bookmark_params.merge(user_id: current_user.id))
-    # bookmark.get_webshot
+    @bookmark.get_webshot
   end
 
   def edit; end
 
   def update
+    old_url = @bookmark.url
     @bookmark.update(bookmark_params)
-    # @bookmark.get_webshot
+    unless old_url == @bookmark.url
+      @bookmark.get_webshot
+    end
   end
 
   def destroy

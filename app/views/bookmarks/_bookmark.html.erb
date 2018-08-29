@@ -1,14 +1,15 @@
 <div class="card mb-2">
     <% if bookmark.thumbnail? %>
-      <a id="bookmark-<%= bookmark.id %>-url" href="<%= bookmark.url %>" target="blank">
+      <a  href="<%= bookmark.url %>" target="blank">
         <%= image_tag(bookmark.thumbnail_url(:display), class: 'card-img-top', alt: bookmark.name) %>
       </a>
-      <p class="overlay-name" id="bookmark-<%= bookmark.id %>-name">
+      <p class="overlay-name">
         <%= bookmark.name %>
       </p>
+      <div class="overlay-name backdrop"></div>
     <% else %>
       <a href="<%= bookmark.url %>" class="thumbnail no-thumb" target="blank">
-        <p class="text-center" id="bookmark-<%= bookmark.id %>-name"><%= bookmark.name %></p>
+        <p class="text-center"> <%= bookmark.name %></p>
         <p class="text-center small">no thumbnail available</p>
       </a>
     <% end %>

@@ -1,6 +1,7 @@
 <% unless current_user %>
   <% controller.redirect_to welcome_path  %>
 <% else %>
+
 <!-- user info, etc. -->
   <div class="card">
     <div class="card-body text-center">
@@ -9,6 +10,7 @@
       <%= link_to "Friends", friends_path, class: 'btn btn-outline-info' %>
     </div>
   </div>
+
 <!-- add new bookmark form -->
     <div class="card">
       <div class="card-body">
@@ -20,6 +22,7 @@
         </div>
       </div>  
     </div>
+
 <!-- search form -->
   <header class="my-2">
     <div class="card mb-2">
@@ -28,9 +31,9 @@
           <h4>Search</h4>
         </button>
         <div class="collapse mt-3" id="search-form-wrap">
-          <%= form_with method: :get, role: 'search', local: true, class: 'form-inline justify-content-center', id: 'search-form' do |f| %>
+          <%= form_with method: :get, role: 'search', remote: true, class: 'form-inline justify-content-center', id: 'bookmarks_search' do |f| %>
             <div class="form-group">
-              <%= f.text_field :q, id: 'search', placeholder: 'Search bookmarks', class: 'form-control mb-2 mr-sm-2', required: true %>
+              <%= f.search_field :q, placeholder: 'Search bookmarks', class: 'form-control mb-2 mr-sm-2', required: true %>
               <%= f.submit "Search", name: nil, class: 'btn btn-primary mb-2' %>
             </div>
           <% end %>
@@ -38,23 +41,14 @@
       </div>
     </div>
   </header>
+
 <!-- bookmarks renders -->
   <main>
     <div class="row my-3" id="bookmarks">
-      <% @bookmarks.each do |bookmark| %>
-        <div class="col-xl-3 col-lg-4 col-sm-6 bookmark" id=<%= "bookmark-#{bookmark.id}" %>> 
-          <%= render bookmark %>
-        </div>
-      <% end %>
+      <%= render 'bookmarks/bookmarks' %>
     </div>
   </main>
-<!-- footer/pagination -->
-  <footer>
-    <%= paginate @bookmarks %>
-    <p class="pager_info">
-      <%= page_entries_info @bookmarks %>
-    </p>
-  </footer>
+
 <!-- modal for edit -->
   <div class="modal fade" id="modal_edit">
     <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -68,7 +62,7 @@
         <div class="modal-body" id="modal-form"></div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>

@@ -1,15 +1,3 @@
-@media (min-width: 768px) {
-  #search-collapse {
-    display: none;
-  }
-}
-@media (max-width: 768px) {
-  #search-title {
-    display: none;
-  }
-}
-
-
 .bookmark {
   position: relative;
   height: 100%;
@@ -35,8 +23,15 @@
   .overlay-name {
     bottom: -16px;
     right: 0;
-    padding: 0 20px 0 100%;
+    padding-right: 20px;
     background-color: #eee;
+    z-index: 2;
+  }
+  .overlay-name.backdrop {
+    padding-left: 300px;
+    height: 50px;
+    bottom: -26px;
+    z-index: 1;
   }
 
   .overlay-links {

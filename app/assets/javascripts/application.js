@@ -17,9 +17,9 @@
 //= require popper
 //= require bootstrap-sprockets
 
-$(document).ready(function {
-  $("#search_form input").keyup(function() {
-    $.get($("#search_form").attr("action"), $("#search_form").serialize(), null, "script");
+$(function() {
+  $("#bookmarks_search input").keyup(function() {
+    $.get($("#bookmarks_search").attr("action"), $("#bookmarks_search").serialize(), null, "script");
     return false;
   });
 });

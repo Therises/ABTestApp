@@ -3,10 +3,6 @@ class Bookmark < ApplicationRecord
   belongs_to :user
   mount_uploader :thumbnail, ThumbnailUploader
 
-#   scope :search, -> (q, id) { where(user_id: id)
-# .where("name ILIKE ?", "%#{q}%")
-# .or(where("url ILIKE ?", "%#{q}%")) }
-
   def self.search(q, id)
     if q
       where(user_id: id)
