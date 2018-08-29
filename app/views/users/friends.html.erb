@@ -2,10 +2,10 @@
   <h2>Your friends who also use this app</h2>
   <% @friends.each do |friend| %>
     <p>
-      <%= link_to friend.name, user_path(friend) %>
+      <%= link_to friend.name, user_path(friend), class: 'btn btn-info' %>
     </p>
   <% end %>
   <% else %>
-  <h2>Seems that none of your friends use this app</h2>
+  <h2 class="text-center m-3">Seems that none of your friends use this app</h2>
 <% end %>
-<%= link_to "Back", root_path %>
+<%= link_to "Back", root_path, class: 'btn btn-info' %>

@@ -1,7 +1,10 @@
 class BookmarksController < ApplicationController
   before_action :find_bookmark, only: %i(edit update destroy)
   def index
-    @bookmarks = Bookmark.search(params[:q], current_user.id).order(created_at: :desc).page(params[:page])
+    @bookmarks = Bookmark.search( params[:q],
+                          current_user.id )
+                          .order(created_at: :desc)
+                          .page(params[:page]) if current_user
   end
   def create
     @bookmark = Bookmark.create(bookmark_params.merge(user_id: current_user.id))
