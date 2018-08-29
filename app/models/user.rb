@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :generate_token
   has_many :bookmarks
 
 
@@ -15,6 +16,12 @@ class User < ApplicationRecord
 
   def facebook
     @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
+  def generate_token
+    begin
+      self[:unique_token] = SecureRandom.urlsafe_base64
+    end while User.exists?(unique_token: self[:unique_token])
   end
   
 end

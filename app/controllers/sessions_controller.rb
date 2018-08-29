@@ -1,12 +1,12 @@
 class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(request.env["omniauth.auth"])
-    session[:user_id] = user.id
+    cookies[:unique_token] = user.unique_token
     redirect_to root_url
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:unique_token)
     redirect_to welcome_url
   end
 end

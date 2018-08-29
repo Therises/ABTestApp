@@ -1,7 +1,5 @@
 <% @bookmarks.each do |bookmark| %>
-  <div class="col-xl-3 col-lg-4 col-sm-6 bookmark" id=<%= "bookmark-#{bookmark.id}" %>> 
     <%= render bookmark %>
-  </div>
 <% end %>
 <div class="pagination-wrap col-12">
   <div><%= paginate @bookmarks %></div>
